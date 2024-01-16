@@ -1,9 +1,0 @@
----
-- name: Set Hostname for Ubuntu Machines
-  hosts: all
-  become: true
-
-  tasks:
-    - name: Set hostname
-      hostname:
-        name: "UD-{{ ansible_default_ipv4.address.split('.')[-1] | regex_replace('^(\\d)(\\d)$', '\\1-\\2') | regex_replace('^0', '') }}"
