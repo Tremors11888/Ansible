@@ -9,7 +9,7 @@
 
     - name: Get last two digits of last octet
       set_fact:
-      ip_last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | slice(-2,) }}"
+        ip_last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | slice(-2,) }}"
     
     - name: Set hostname based on last two digits
       hostname: 
