@@ -5,7 +5,7 @@
 
   tasks:
     - name: Get last octet of IP address
-      shell: "ip route get 1 | awk '{print $NF}' | cut -d'.' -f4"
+      shell: "ip route get 1 | awk '{print $NF}' | cut -d'.' -f4 | tr -d '\n'"
       register: ip_last_octet
 
     - name: Set hostname
