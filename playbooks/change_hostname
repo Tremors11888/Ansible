@@ -1,0 +1,9 @@
+---
+- name: Set Hostname for Ubuntu Machines
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Set hostname
+      hostname:
+        name: "{{ ansible_host }}"
