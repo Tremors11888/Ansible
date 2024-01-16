@@ -6,4 +6,4 @@
   tasks:
     - name: Set hostname
       hostname:
-        name: "{{ ansible_host }}"
+        name: "{{ ansible_host.split('.')[-1] | regex_replace('^(\\d)(\\d)$', '\\1-\\2') | regex_replace('^0', '') }}"
