@@ -6,4 +6,4 @@
   tasks:
     - name: Set hostname
       hostname:
-        name: "UD-{{ ansible_host | regex_replace('\\.', '-') | regex_replace('.*-(\\d+)$', '\\1') }}"
+        name: "UD-{{ ansible_default_ipv4.address | regex_replace('\\.', '-') | regex_replace('^.*-(\\d)(\\d)$', '\\1-\\2') }}"
