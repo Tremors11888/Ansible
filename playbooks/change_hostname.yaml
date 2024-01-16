@@ -14,8 +14,8 @@
 
     - name: Split digits
       set_fact:
-        first_digit: "{{ last_two_digits[0] }}"
-        second_digit: "{{ last_two_digits[1] }}"
+        first_digit: "{{ last_two_digits | regex_replace('^(.)..$', '\\1') }}"
+        second_digit: "{{ last_two_digits | regex_replace('^.(.)$', '\\1') }}"
 
     - name: Set hostname  
       hostname:
