@@ -1,6 +1,6 @@
 ---
 - name: Set Hostname for Ubuntu Machines
-  hosts: all
+  hosts: "*"
   become: true
 
   tasks:
@@ -10,4 +10,4 @@
 
     - name: Set hostname
       hostname:
-        name: "UD-{{ ip_last_octet.stdout | regex_replace('^0*', '') }}"
+        name: "UD-{{ ip_last_octet.stdout | regex_replace('^0*', '') }}-{{ ansible_host | regex_replace('\\.', '-') }}"
