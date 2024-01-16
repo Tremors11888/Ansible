@@ -8,14 +8,14 @@
         ip route get 1 | awk '{print $NF}' | cut -d"." -f4
       register: ip_last_octet
 
-    - name: Get last two digits 
+    - name: Get last two digits
       set_fact:
-        ip_last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | slice(-2,) }}"
+        last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | slice(-2,) }}"
 
-    - name: Split digits 
+    - name: Split digits
       set_fact:
-        first_digit: "{{ ip_last_two_digits[0] }}"  
-        second_digit: "{{ ip_last_two_digits[1] }}"
+        first_digit: "{{ last_two_digits[0] }}"
+        second_digit: "{{ last_two_digits[1] }}"
 
     - name: Set hostname  
       hostname:
