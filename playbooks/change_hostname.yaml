@@ -1,22 +1,13 @@
 ---
-- hosts: all
-  become: yes 
-  vars:
+- name: Set Hostname for Ubuntu Machines
+  hosts: all
+  become: true
+
   tasks:
     - name: Get last octet of IP address
-      shell: |
-        ip route get 1 | awk '{print $NF}' | cut -d"." -f4
+      shell: "ip route get 1 | awk '{print $NF}' | cut -d'.' -f4"
       register: ip_last_octet
 
-    - name: Get last two digits
-      set_fact:
-        last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | slice(-2,) }}"
-
-    - name: Split digits
-      set_fact:
-        first_digit: "{{ last_two_digits | regex_replace('^(.)..$', '\\1') }}"
-        second_digit: "{{ last_two_digits | regex_replace('^.(.)$', '\\1') }}"
-
-    - name: Set hostname  
+    - name: Set hostname
       hostname:
-        name: "UD-{{ first_digit }}-{{ second_digit }}"
+        name: "UD-{{ ip_last_octet.stdout | regex_replace('^0*', '') }}"
