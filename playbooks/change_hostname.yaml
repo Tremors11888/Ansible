@@ -1,13 +1,9 @@
 ---
 - name: Set Hostname for Ubuntu Machines
-  hosts: "*"
+  hosts: all
   become: true
 
   tasks:
-    - name: Get last octet of IP address
-      shell: "ip route get 1 | awk '{print $NF}' | cut -d'.' -f4 | tr -d '\n'"
-      register: ip_last_octet
-
     - name: Set hostname
       hostname:
-        name: "UD-{{ ip_last_octet.stdout | regex_replace('^0*', '') }}-{{ ansible_host | regex_replace('\\.', '-') }}"
+        name: "UD-{{ ansible_default_ipv4.address | regex_replace('\\.', '-') }}"
