@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Get last octet of IP address
+      shell: | 
+        ip route get 1 | awk '{print $NF}' | cut -d"." -f4
+      register: ip_last_octet
+
+    - name: Get last two digits of last octet  
+      set_fact:
+        ip_last_two_digits: "{{ ip_last_octet.stdout | int | abs | string | right(2) }}"
+    
+    - name: Set hostname based on last two digits
+      hostname: 
+        name: "UD-{{ ip_last_two_digits[0] }}-{{ ip_last_two_digits[1] }}"
