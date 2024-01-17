@@ -1,5 +1,5 @@
 - name: Change server names based on IP addresses
-  hosts: ubuntu_desktops
+  hosts: all
   gather_facts: no
 
   tasks:
