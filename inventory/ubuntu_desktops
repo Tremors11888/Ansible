@@ -1,11 +1,9 @@
-[host1]
-10.50.28.111 new_hostname=UD-1-1
-10.50.28.112 new_hostname=UD-1-2
-
-[host2]
-10.50.28.121 new_hostname=UD-2-1
-10.50.28.122 new_hostname=UD-2-2
-
-[host3]
-10.50.28.131 new_hostname=UD-3-1
-10.50.28.132 new_hostname=UD-3-2
+[pve1]
+10.50.28.111 ansible_hostname=UD-1-1
+10.50.28.112 ansible_hostname=UD-1-2
+[pve2]
+10.50.28.121 ansible_hostname=UD-2-1
+10.50.28.122 ansible_hostname=UD-2-2
+[pve3]
+10.50.28.131 ansible_hostname=UD-3-1
+10.50.28.132 ansible_hostname=UD-3-2
