@@ -1,0 +1,17 @@
+- name: Change server names based on IP addresses
+  hosts: ubuntu_desktops
+  gather_facts: no
+
+  tasks:
+    - name: Get IP address
+      shell: ip -o -4 addr show eth0 | awk '{print $4}'
+      register: ip_address
+
+    - name: Extract last two digits of IP address
+      set_fact:
+        ip_last_digit: "{{ ip_address.stdout.split('.')[-1][-1:] }}"
+        ip_2nd_to_last_digit: "{{ ip_address.stdout.split('.')[-1][-2:-1] }}"
+
+    - name: Change hostname
+      hostname:
+        name: "UD-{{ ip_2nd_to_last_digit }}-{{ ip_last_digit }}"
