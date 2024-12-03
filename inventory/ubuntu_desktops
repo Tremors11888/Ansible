@@ -1,3 +1,8 @@
+[pvehosts:children]
+pve1
+pve2
+pve3
+
 [pve1]
 10.50.28.111 ansible_hostname=UD-1-1
 10.50.28.112 ansible_hostname=UD-1-2
